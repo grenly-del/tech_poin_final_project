@@ -1,10 +1,10 @@
-import Footer from "../components/navbar";
-import HeroPages from "../components/HeroPages";
+import Footer from "../components/homePage/Footer";
+import HeroPages from "../components/homePage/index";
 import PlanTrip from "../components/homePage/PlanTrip";
-import AboutMain from "../images/about/about-main.jpg";
-import Box1 from "../images/about/icon1.png";
-import Box2 from "../images/about/icon2.png";
-import Box3 from "../images/about/icon3.png";
+const AboutMain = "./images/about/about-main.jpg";
+const Box1 = "./images/about/icon1.png";
+const Box2 = "./images/about/icon2.png";
+const Box3 = "./images/about/icon3.png";
 
 function About() {
   return (

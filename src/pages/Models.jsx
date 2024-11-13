@@ -1,11 +1,11 @@
-import Footer from "../components/Footer";
-import HeroPages from "../components/HeroPages";
-import CarImg1 from "../images/cars-big/audi-box.png";
-import CarImg2 from "../images/cars-big/golf6-box.png";
-import CarImg3 from "../images/cars-big/toyota-box.png";
-import CarImg4 from "../images/cars-big/bmw-box.png";
-import CarImg5 from "../images/cars-big/benz-box.png";
-import CarImg6 from "../images/cars-big/passat-box.png";
+import Footer from "../components/homePage/Footer";
+import HeroPages from "../components/homePage";
+const CarImg1 = "./images/cars-big/audi-box.png";
+const CarImg2 = "./images/cars-big/golf6-box.png";
+const CarImg3 = "./images/cars-big/toyota-box.png";
+const CarImg4 = "./images/cars-big/bmw-box.png";
+const CarImg5 = "./images/cars-big/benz-box.png";
+const CarImg6 = "./images/cars-big/passat-box.png";
 import { Link } from "react-router-dom";
 
 function Models() {

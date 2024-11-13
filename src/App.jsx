@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import About from "./pages/About";
 import Models from "./pages/Models";
 import TestimonialsPage from "./pages/TestimonialsPage";
+import Team from "./pages/Team";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="models" element={<Models />} />
         <Route path="testimonials" element={<TestimonialsPage />} />
+        <Route path="team" element={<Team />} />
       </Routes>
     </>
   );

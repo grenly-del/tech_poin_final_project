@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
-// import BgShape from "./images/hero/hero-bg.png";
-// import HeroCar from "./images/hero/main-car.png";
 import { useEffect, useState } from "react";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 function Hero() {
   const [goUp, setGoUp] = useState(false);
+  const [hero, setHero] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: (0, 0), behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const bookBtn = () => {
@@ -18,50 +19,63 @@ function Hero() {
 
   useEffect(() => {
     const onPageScroll = () => {
-      if (window.pageYOffset > 600) {
-        setGoUp(true);
-      } else {
-        setGoUp(false);
-      }
+      setGoUp(window.pageYOffset > 600);
     };
     window.addEventListener("scroll", onPageScroll);
-
-    return () => {
-      window.removeEventListener("scroll", onPageScroll);
-    };
+    return () => window.removeEventListener("scroll", onPageScroll);
   }, []);
+
+  useEffect(() => {
+    const db = getDatabase();
+    const heroRef = ref(db, "homepage/");
+    onValue(heroRef, (snapshot) => {
+      const data = snapshot.val();
+      setHero(data || {}); // Ensure hero is not null
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <section id="home" className="hero-section">
         <div className="container">
-          <img className="bg-shape" src='./images/hero/hero-bg.png' alt="bg-shape" />
+          <img
+            className="bg-shape"
+            src={hero.Hero.images.background}
+            alt="bg-shape"
+          />
           <div className="hero-content">
             <div className="hero-content__text">
-              <h4>Plan your trip now</h4>
+              <h4>{hero.Hero.title || ""}</h4>
               <h1>
-                Save <span>big</span> with our car rental
+                {hero.Hero.subtitle.first}{" "}
+                <span>{hero.Hero.subtitle.second}</span>{" "}
+                {hero.Hero.subtitle.third}
               </h1>
-              <p>
-                Rent the car of your dreams. Unbeatable prices, unlimited miles,
-                flexible pick-up options and much more.
-              </p>
+              <p>{hero.Hero.desc}</p>
               <div className="hero-content__text__btns">
                 <Link
                   onClick={bookBtn}
                   className="hero-content__text__btns__book-ride"
                   to="/"
                 >
-                  Book Ride &nbsp; <i className="fa-solid fa-circle-check"></i>
+                  {hero.Hero.btnbook} &nbsp;{" "}
+                  <i className="fa-solid fa-circle-check"></i>
                 </Link>
                 <Link className="hero-content__text__btns__learn-more" to="/">
-                  Learn More &nbsp; <i className="fa-solid fa-angle-right"></i>
+                  {hero.Hero.btnlearn} &nbsp;{" "}
+                  <i className="fa-solid fa-angle-right"></i>
                 </Link>
               </div>
             </div>
 
             {/* img */}
             <img
-              src='./images/hero/main-car.png'
+              src={hero.Hero.images.content}
               alt="car-img"
               className="hero-content__car-img"
             />

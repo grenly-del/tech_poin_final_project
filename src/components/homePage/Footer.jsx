@@ -1,4 +1,16 @@
-function Footer() {
+import { getDatabase, ref, onValue } from "firebase/database";
+import { useEffect, useState } from "react";
+
+const Footer = () => {
+  const [footer, setFooter] = useState({});
+  useEffect(() => {
+    const db = getDatabase();
+    const footerRef = ref(db, "footer/");
+    onValue(footerRef, (snapshot) => {
+      const data = snapshot.val();
+      setFooter(data);
+    });
+  }, []);
   return (
     <>
       <footer>
@@ -6,15 +18,14 @@ function Footer() {
           <div className="footer-content">
             <ul className="footer-content__1">
               <li>
-                <span>CAR</span> Rental
+                <span>{footer.car}</span> {footer.rental}
               </li>
               <li>
-                We offers a big range of vehicles for all your driving needs. We
-                have the perfect car to meet your needs.
+                {footer.cartext}
               </li>
               <li>
                 <a href="tel:123456789">
-                  <i className="fa-solid fa-phone"></i> &nbsp; (123) -456-789
+                  <i className="fa-solid fa-phone"></i> &nbsp; {footer.number}
                 </a>
               </li>
 
@@ -24,58 +35,46 @@ function Footer() {
                 carrental@gmail.com"
                 >
                   <i className="fa-solid fa-envelope"></i>
-                  &nbsp; carrental@xyz.com
-                </a>
-              </li>
-
-              <li>
-                <a
-                  style={{ fontSize: "14px" }}
-                  target="_blank"
-                  rel="noreferrer"
-                  href="https://devrahuls.vercel.app/"
-                >
-                  Design with ❤️ by Rahul
+                  &nbsp; {footer.email}
                 </a>
               </li>
             </ul>
-
             <ul className="footer-content__2">
-              <li>Company</li>
+              <li>{footer.company}</li>
               <li>
-                <a href="#home">Gallery</a>
+                <a href="#home">{footer.gallery}</a>
               </li>
               <li>
-                <a href="#home">Careers</a>
+                <a href="#home">{footer.careers}</a>
               </li>
               <li>
-                <a href="#home">Mobile</a>
+                <a href="#home">{footer.mobil}</a>
               </li>
               <li>
-                <a href="#home">Blog</a>
+                <a href="#home">{footer.blog}</a>
               </li>
               <li>
-                <a href="#home">How we work</a>
+                <a href="#home">{footer.how}</a>
               </li>
             </ul>
 
             <ul className="footer-content__2">
-              <li>Working Hours</li>
-              <li>Mon - Fri: 9:00AM - 9:00PM</li>
-              <li>Sat: 9:00AM - 19:00PM</li>
-              <li>Sun: Closed</li>
+              <li>{footer.working}</li>
+              <li>{footer.date}</li>
+              <li>{footer.time}</li>
+              <li>{footer.close}</li>
             </ul>
 
             <ul className="footer-content__2">
-              <li>Subscription</li>
+              <li>{footer.sub}</li>
               <li>
-                <p>Subscribe your Email address for latest news & updates.</p>
+                <p>{footer.subscribe}</p>
               </li>
               <li>
                 <input type="email" placeholder="Enter Email Address"></input>
               </li>
               <li>
-                <button className="submit-email">Submit</button>
+                <button className="submit-email">{footer.submit}</button>
               </li>
             </ul>
           </div>

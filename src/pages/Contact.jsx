@@ -20,11 +20,11 @@ function Contact() {
               </a>
               <a href="/">
                 <i className="fa-solid fa-envelope"></i>&nbsp;
-                carrental@xyz.com
+                tprental@gmail.com
               </a>
               <a href="/">
-                <i className="fa-solid fa-location-dot"></i>&nbsp; Bengaluru,
-                Karnatka
+                <i className="fa-solid fa-location-dot"></i>&nbsp; Manado,
+                Airmadidi
               </a>
             </div>
             <div className="contact-div__form">

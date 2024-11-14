@@ -3,6 +3,7 @@ import HeroPages from "../components/homePage/index";
 import PlanTrip from "../components/homePage/PlanTrip";
 import { useEffect, useState } from "react";
 import { getDatabase, onValue, ref } from "firebase/database";
+import LoadingBars from "../components/loadingBars";
 
 
 
@@ -74,7 +75,7 @@ function About() {
     <Footer />
     </>
     ) : (
-      <h1>loding..</h1>
+      <LoadingBars />
     )}
       
     </>

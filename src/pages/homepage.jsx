@@ -41,7 +41,7 @@ function Home() {
     
       {!isLoading ? (
         <div>
-          <Hero data={hero}/>
+          <Hero/>
           <BookCar />
           <PlanTrip data={about}/>
           <PickCar />

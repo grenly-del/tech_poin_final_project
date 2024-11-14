@@ -1,11 +1,10 @@
 import Footer from "../components/homePage/Footer";
 import HeroPages from "../components/homePage";
+
 const Person1 = "./images/team/1.png";
 const Person2 = "./images/team/2.png";
 const Person3 = "./images/team/3.png";
 const Person4 = "./images/team/4.png";
-const Person5 = "./images/team/5.png";
-const Person6 = "./images/team/6.png";
 
 function Team() {
   const teamPpl = [
@@ -13,8 +12,6 @@ function Team() {
     { img: Person2, name: "Michael Diaz", job: "Business Owner" },
     { img: Person3, name: "Briana Ross", job: "Photographer" },
     { img: Person4, name: "Lauren Rivera", job: "Car Detailist" },
-    { img: Person5, name: "Martin Rizz", job: "Mechanic" },
-    { img: Person6, name: "Caitlyn Hunt", job: "Menager" },
   ];
   return (
     <>

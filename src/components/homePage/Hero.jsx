@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getDatabase, ref, onValue } from "firebase/database";
-// test
 
-const Hero = () => {
+
+function Hero() {
   const [goUp, setGoUp] = useState(false);
   const [hero, setHero] = useState({});
   const [loading, setLoading] = useState(true);
@@ -93,6 +93,6 @@ const Hero = () => {
       </section>
     </>
   );
-};
+}
 
 export default Hero;

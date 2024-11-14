@@ -2,7 +2,7 @@ import "../src/dist/styles.css";
 import Home from "./pages/homepage";
 import Navbar from "./components/navbar";
 import { Route, Routes } from "react-router-dom";
-import About from "./components/about/About";
+import About from "./pages/About";
 import Models from "./pages/Models";
 import TestimonialsPage from "./pages/TestimonialsPage";
 import Team from "./pages/Team";

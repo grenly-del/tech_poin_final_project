@@ -26,7 +26,7 @@ const Team = () => {
       job: ourteam.foto2?.desc,
     },
     {
-      img: ourteam.foto1?.img1 || "loading image",
+      img: ourteam.foto3?.img3 || "loading image",
       name: ourteam.foto3?.nama3,
       job: ourteam.foto3?.desc3,
     },

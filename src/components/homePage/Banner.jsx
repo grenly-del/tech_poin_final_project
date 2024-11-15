@@ -1,13 +1,26 @@
-function Banner() {
+import { getDatabase, ref, onValue } from "firebase/database";
+import { useEffect, useState } from "react";
+
+const Banner = () => {
+  const [banner, setBanner] = useState({});
+  useEffect(() => {
+    const db = getDatabase();
+    const bannerRef = ref(db, "homepage/banner");
+    onValue(bannerRef, (snapshot) => {
+      const data = snapshot.val();
+      setBanner(data);
+    });
+  }, []);
   return (
     <>
       <section className="banner-section">
         <div className="container">
           <div className="banner-content">
             <div className="banner-content__text">
-              <h2>Save big with our cheap car rental!</h2>
+              <h2>{banner.title}</h2>
               <p>
-                Top Airports. Local Suppliers. <span>24/7</span> Support.
+                {banner.top}
+                <span>{banner.date}</span> {banner.support}
               </p>
             </div>
           </div>
@@ -15,6 +28,6 @@ function Banner() {
       </section>
     </>
   );
-}
+};
 
 export default Banner;

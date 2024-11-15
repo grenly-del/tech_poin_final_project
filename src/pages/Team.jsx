@@ -1,18 +1,31 @@
 import Footer from "../components/homePage/Footer";
 import HeroPages from "../components/homePage";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { useEffect, useState } from "react";
 
 const Person1 = "./images/team/1.png";
 const Person2 = "./images/team/2.png";
 const Person3 = "./images/team/3.png";
 const Person4 = "./images/team/4.png";
 
-function Team() {
+const Team = () => {
+  const [ourteam, setTeam] = useState({});
+  useEffect(() => {
+    const db = getDatabase();
+    const ourteamRef = ref(db, "ourteam/");
+    onValue(ourteamRef, (snapshot) => {
+      const data = snapshot.val();
+      setTeam(data);
+    });
+  }, []);
+
   const teamPpl = [
-    { img: Person1, name: "Luke Miller", job: "Salesman" },
-    { img: Person2, name: "Michael Diaz", job: "Business Owner" },
-    { img: Person3, name: "Briana Ross", job: "Photographer" },
-    { img: Person4, name: "Lauren Rivera", job: "Car Detailist" },
+    { img: Person1, name: "Grantly", job: "test" },
+    { img: Person2, name: "Grantly", job: "test" },
+    { img: Person3, name: "Grantly", job: "test" },
+    { img: Person4, name: "Grantly", job: "test" },
   ];
+
   return (
     <>
       <section className="team-page">
@@ -36,10 +49,10 @@ function Team() {
           <div className="book-banner__overlay"></div>
           <div className="container">
             <div className="text-content">
-              <h2>Book a car by getting in touch with us</h2>
+              <h2>{ourteam.book}</h2>
               <span>
                 <i className="fa-solid fa-phone"></i>
-                <h3>(123) 456-7869</h3>
+                <h3>{ourteam.no}</h3>
               </span>
             </div>
           </div>
@@ -48,6 +61,6 @@ function Team() {
       </section>
     </>
   );
-}
+};
 
 export default Team;

@@ -16,6 +16,7 @@ const Team = () => {
     onValue(ourteamRef, (snapshot) => {
       const data = snapshot.val();
       setTeam(data);
+      console.log(data);
     });
   }, []);
 

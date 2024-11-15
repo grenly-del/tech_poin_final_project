@@ -30,7 +30,7 @@ const Hero = () => {
     const heroRef = ref(db, "homepage/");
     onValue(heroRef, (snapshot) => {
       const data = snapshot.val();
-      setHero(data || {}); // Ensure hero is not null
+      setHero(data || {});
       setLoading(false);
     });
   }, []);

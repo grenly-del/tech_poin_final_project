@@ -1,45 +1,28 @@
-const SelectCar = "./images/plan/icon1.png";
-const Contact = "./images/plan/icon2.png";
-const Drive = "./images/plan/icon3.png";
+/* eslint-disable react/prop-types */
 
-function PlanTrip() {
+
+
+function PlanTrip({data}) {
   return (
     <>
       <section className="plan-section">
         <div className="container">
           <div className="plan-container">
             <div className="plan-container__title">
-              <h3>Plan your trip now</h3>
-              <h2>Quick & easy car rental</h2>
+              <h3>{data.subtitle}</h3>
+              <h2>{data.title}</h2>
             </div>
 
             <div className="plan-container__boxes">
-              <div className="plan-container__boxes__box">
-                <img src={SelectCar} alt="icon_img" />
-                <h3>Select Car</h3>
+              {data.card.map((val, index) => (
+              <div key={index} className="plan-container__boxes__box">
+                <img src={val.image} alt="icon_img" />
+                <h3>{val.name}</h3>
                 <p>
-                  We offers a big range of vehicles for all your driving needs.
-                  We have the perfect car to meet your needs
+                  {val.desc}
                 </p>
               </div>
-
-              <div className="plan-container__boxes__box">
-                <img src={Contact} alt="icon_img" />
-                <h3>Contact Operator</h3>
-                <p>
-                  Our knowledgeable and friendly operators are always ready to
-                  help with any questions or concerns
-                </p>
-              </div>
-
-              <div className="plan-container__boxes__box">
-                <img src={Drive} alt="icon_img" />
-                <h3>Let's Drive</h3>
-                <p>
-                  Whether you're hitting the open road, we've got you covered
-                  with our wide range of cars
-                </p>
-              </div>
+              ))}
             </div>
           </div>
         </div>

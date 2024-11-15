@@ -17,7 +17,7 @@ const Banner = () => {
         <div className="container">
           <div className="banner-content">
             <div className="banner-content__text">
-              <h2>{banner.save}</h2>
+              <h2>{banner.title}</h2>
               <p>
                 {banner.top}
                 <span>{banner.date}</span> {banner.support}

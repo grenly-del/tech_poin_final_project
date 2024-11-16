@@ -8,7 +8,7 @@ const CarImg5 = "./images/cars-big/benz-box.png";
 const CarImg6 = "./images/cars-big/passat-box.png";
 import { Link } from "react-router-dom";
 
-function Models() {
+const Models = () => {
   return (
     <>
       <section className="models-section">
@@ -290,6 +290,6 @@ function Models() {
       </section>
     </>
   );
-}
+};
 
 export default Models;

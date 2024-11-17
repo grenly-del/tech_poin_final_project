@@ -1,10 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CarBox from "../CarBox";
 import { CAR_DATA } from "../CarData";
 
-function PickCar() {
+function PickCar({data}) {
   const [active, setActive] = useState("SecondCar");
   const [colorBtn, setColorBtn] = useState("btn1");
+  const [vehicle, setVehicle] = useState({})
+  const [carData, setCarData] = useState([])
+
+  useEffect(() => {
+    if(data) {
+      setVehicle(data)
+      let dataCars = []
+      data.cars.map((val, index) => {
+        dataCars.push(
+            {
+              name: val.name,
+              price: val.price,
+              img: val.image,
+              model: val.model,
+              mark: val.mark,
+              year: val.year,
+              doors: val.doors,
+              air: val.ac,
+              transmission: val.transmission,
+              fuel: val.fuel,
+            }
+          )
+      })
+      setCarData(dataCars.reverse())
+    }
+  }, [data])
+
 
   const btnID = (id) => {
     setColorBtn(colorBtn === id ? "" : id);
@@ -20,11 +47,10 @@ function PickCar() {
         <div className="container">
           <div className="pick-container">
             <div className="pick-container__title">
-              <h3>Vehicle Models</h3>
-              <h2>Our rental fleet</h2>
+              <h3>{vehicle.subtitle}</h3>
+              <h2>{vehicle.title}</h2>
               <p>
-                Choose from a variety of our amazing vehicles to rent for your
-                next adventure or business trip
+                {vehicle.desc}
               </p>
             </div>
             <div className="pick-container__car-content">
@@ -91,12 +117,12 @@ function PickCar() {
                 </button>
               </div>
 
-              {active === "FirstCar" && <CarBox data={CAR_DATA} carID={0} />}
-              {active === "SecondCar" && <CarBox data={CAR_DATA} carID={1} />}
-              {active === "ThirdCar" && <CarBox data={CAR_DATA} carID={2} />}
-              {active === "FourthCar" && <CarBox data={CAR_DATA} carID={3} />}
-              {active === "FifthCar" && <CarBox data={CAR_DATA} carID={4} />}
-              {active === "SixthCar" && <CarBox data={CAR_DATA} carID={5} />}
+              {active === "FirstCar" && <CarBox data={carData} carID={1} />}
+              {active === "SecondCar" && <CarBox data={carData} carID={0} />}
+              {active === "ThirdCar" && <CarBox data={carData} carID={2} />}
+              {active === "FourthCar" && <CarBox data={carData} carID={3} />}
+              {active === "FifthCar" && <CarBox data={carData} carID={5} />}
+              {active === "SixthCar" && <CarBox data={carData} carID={4} />} 
             </div>
           </div>
         </div>

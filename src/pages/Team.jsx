@@ -3,11 +3,6 @@ import HeroPages from "../components/homePage";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { useEffect, useState } from "react";
 
-const Person1 = "./images/team/1.png";
-const Person2 = "./images/team/2.png";
-const Person3 = "./images/team/3.png";
-const Person4 = "./images/team/4.png";
-
 const Team = () => {
   const [ourteam, setTeam] = useState({});
   useEffect(() => {
@@ -16,22 +11,37 @@ const Team = () => {
     onValue(ourteamRef, (snapshot) => {
       const data = snapshot.val();
       setTeam(data);
-      console.log(data);
     });
   }, []);
 
   const teamPpl = [
-    { img: Person1, name: "Grantly", job: "test" },
-    { img: Person2, name: "Grantly", job: "test" },
-    { img: Person3, name: "Grantly", job: "test" },
-    { img: Person4, name: "Grantly", job: "test" },
+    {
+      img: ourteam.foto1?.img1 || "loading image",
+      name: ourteam.foto1?.nama1,
+      job: ourteam.foto1?.desc,
+    },
+    {
+      img: ourteam.foto2?.img2 || "loading image",
+      name: ourteam.foto2?.nama2,
+      job: ourteam.foto2?.desc,
+    },
+    {
+      img: ourteam.foto3?.img3 || "loading image",
+      name: ourteam.foto3?.nama3,
+      job: ourteam.foto3?.desc3,
+    },
+    {
+      img: ourteam.foto4?.img4 || "loading image",
+      name: ourteam.foto4?.nama4,
+      job: ourteam.foto4?.desc4,
+    },
   ];
 
   return (
     <>
       <section className="team-page">
         <HeroPages name="Our Team" />
-        <div className="cotnainer">
+        <div className="container">
           <div className="team-container">
             {teamPpl.map((ppl, id) => (
               <div key={id} className="team-container__box">

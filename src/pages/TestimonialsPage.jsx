@@ -2,7 +2,7 @@ import Footer from "../components/homePage/Footer";
 import HeroPages from "../components/homePage";
 import Testimonials from "../components/homePage/Testimonials";
 
-function TestimonialsPage() {
+const TestimonialsPage = () => {
   return (
     <>
       <section className="testimonial-page">
@@ -24,6 +24,6 @@ function TestimonialsPage() {
       </section>
     </>
   );
-}
+};
 
 export default TestimonialsPage;

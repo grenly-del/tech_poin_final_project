@@ -1,21 +1,26 @@
-const Img2 = "./images/testimonials/pfp1.jpg";
-const Img3 = "./images/testimonials/pfp2.jpg";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { useEffect, useState } from "react";
 
-function Testimonials() {
+const Testimonials = () => {
+  const [testimonial, setTestimonials] = useState({});
+  useEffect(() => {
+    const db = getDatabase();
+    const testimonialRef = ref(db, "homepage/testimonial");
+    onValue(testimonialRef, (snapshot) => {
+      const data = snapshot.val();
+      setTestimonials(data);
+    });
+  }, []);
+
   return (
     <>
       <section className="testimonials-section">
         <div className="container">
           <div className="testimonials-content">
             <div className="testimonials-content__title">
-              <h4>Reviewed by People</h4>
-              <h2>Client's Testimonials</h2>
-              <p>
-                Discover the positive impact we've made on the our clients by
-                reading through their testimonials. Our clients have experienced
-                our service and results, and they're eager to share their
-                positive experiences with you.
-              </p>
+              <h4>{testimonial.title}</h4>
+              <h2>{testimonial.subtitle}</h2>
+              <p>{testimonial.desc}</p>
             </div>
 
             <div className="all-testimonials">
@@ -23,17 +28,16 @@ function Testimonials() {
                 <span className="quotes-icon">
                   <i className="fa-solid fa-quote-right"></i>
                 </span>
-                <p>
-                  "We rented a car from this website and had an amazing
-                  experience! The booking was easy and the rental rates were
-                  very affordable. "
-                </p>
+                <p>{testimonial.review1?.desc || "Loading..."}</p>
                 <div className="all-testimonials__box__name">
                   <div className="all-testimonials__box__name__profile">
-                    <img src={Img2} alt="user_img" />
+                    <img
+                      src={testimonial.review1?.photo || "not found"}
+                      alt="user_img"
+                    />
                     <span>
-                      <h4>Parry Hotter</h4>
-                      <p>Belgrade</p>
+                      <h4>{testimonial.review1?.name || "Loading..."}</h4>
+                      <p>{testimonial.review1?.username || "Loading..."}</p>
                     </span>
                   </div>
                 </div>
@@ -43,16 +47,16 @@ function Testimonials() {
                 <span className="quotes-icon">
                   <i className="fa-solid fa-quote-right"></i>
                 </span>
-                <p>
-                  "The car was in great condition and made our trip even better.
-                  Highly recommend for this car rental website!"
-                </p>
+                <p>{testimonial.review2?.desc || "Loading..."}</p>
                 <div className="all-testimonials__box__name">
                   <div className="all-testimonials__box__name__profile">
-                    <img src={Img3} alt="user_img" />
+                    <img
+                      src={testimonial.review2?.photo || "not found"}
+                      alt="user_img"
+                    />
                     <span>
-                      <h4>Ron Rizzly</h4>
-                      <p>Novi Sad</p>
+                      <h4>{testimonial.review2?.name || "Loading..."}</h4>
+                      <p>{testimonial.review2?.username || "Loading..."}</p>
                     </span>
                   </div>
                 </div>
@@ -63,6 +67,6 @@ function Testimonials() {
       </section>
     </>
   );
-}
+};
 
 export default Testimonials;

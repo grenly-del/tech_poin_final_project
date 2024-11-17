@@ -1,9 +1,18 @@
-const MainImg = "./images/chooseUs/main.png";
-const Box1 = "./images/chooseUs/icon1.png";
-const Box2 = "./images/chooseUs/icon2.png";
-const Box3 = "./images/chooseUs/icon3.png";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { useEffect, useState } from "react";
 
-function ChooseUs() {
+const ChooseUs = () => {
+  const [chooseus, setChoose] = useState({});
+
+  useEffect(() => {
+    const db = getDatabase();
+    const chooseRef = ref(db, "homepage/chooseUs");
+    onValue(chooseRef, (snapshot) => {
+      const data = snapshot.val();
+      setChoose(data);
+    });
+  }, []);
+
   return (
     <>
       <section className="choose-section">
@@ -11,57 +20,50 @@ function ChooseUs() {
           <div className="choose-container">
             <img
               className="choose-container__img"
-              src={MainImg}
+              src={chooseus?.images?.main || "not found"}
               alt="car_img"
             />
             <div className="text-container">
               <div className="text-container__left">
-                <h4>Why Choose Us</h4>
-                <h2>Best valued deals you will ever find</h2>
-                <p>
-                  Discover the best deals you'll ever find with our unbeatable
-                  offers. We're dedicated to providing you with the best value
-                  for your money, so you can enjoy top-quality services and
-                  products without breaking the bank. Our deals are designed to
-                  give you the ultimate renting experience, so don't miss out on
-                  your chance to save big.
-                </p>
+                <h4>{chooseus?.section1?.title || "Loading..."}</h4>
+                <h2>{chooseus?.section1?.subtitle || "Loading..."}</h2>
+                <p>{chooseus?.section1?.desc || "Loading..."}</p>
                 <a href="#home">
-                  Find Details &nbsp;
+                  {chooseus?.section1?.btndetails || "Find Details"} &nbsp;
                   <i className="fa-solid fa-angle-right"></i>
                 </a>
               </div>
               <div className="text-container__right">
                 <div className="text-container__right__box">
-                  <img src={Box1} alt="car-img" />
+                  <img
+                    src={chooseus?.images?.icon1 || "not found"}
+                    alt="icon-img"
+                  />
                   <div className="text-container__right__box__text">
-                    <h4>Cross Country Drive</h4>
-                    <p>
-                      Take your driving experience to the next level with our
-                      top-notch vehicles for your cross-country adventures.
-                    </p>
+                    <h4>{chooseus?.section2?.title || "Loading..."}</h4>
+                    <p>{chooseus?.section2?.desc || "Loading..."}</p>
                   </div>
                 </div>
+
                 <div className="text-container__right__box">
-                  {" "}
-                  <img src={Box2} alt="coin-img" />
+                  <img
+                    src={chooseus?.images?.icon2 || "Loading"}
+                    alt="icon-img"
+                  />
                   <div className="text-container__right__box__text">
-                    <h4>All Inclusive Pricing</h4>
-                    <p>
-                      Get everything you need in one convenient, transparent
-                      price with our all-inclusive pricing policy.
-                    </p>
+                    <h4>{chooseus?.section3?.title || "Loading..."}</h4>
+                    <p>{chooseus?.section3?.desc || "Loading..."}</p>
                   </div>
                 </div>
+
                 <div className="text-container__right__box">
-                  {" "}
-                  <img src={Box3} alt="coin-img" />
+                  <img
+                    src={chooseus?.images?.icon3 || "not found"}
+                    alt="icon-img"
+                  />
                   <div className="text-container__right__box__text">
-                    <h4>No Hidden Charges</h4>
-                    <p>
-                      Enjoy peace of mind with our no hidden charges policy. We
-                      believe in transparent and honest pricing.
-                    </p>
+                    <h4>{chooseus?.section3?.title || "Loading..."}</h4>
+                    <p>{chooseus?.section3?.desc || "Loading..."}</p>
                   </div>
                 </div>
               </div>
@@ -71,6 +73,6 @@ function ChooseUs() {
       </section>
     </>
   );
-}
+};
 
 export default ChooseUs;

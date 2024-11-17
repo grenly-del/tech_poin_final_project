@@ -15,6 +15,7 @@ import LoadingBars from "../components/loadingBars";
 function Home() {
   const [about, setAbout] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [vehicle, setVehicle] = useState({})
   const getData = () => {
     const db = getDatabase();
     const heroRef = ref(db, "/homepage");
@@ -22,6 +23,7 @@ function Home() {
       const data = snapshot.val();
       console.log(data.Hero);
       setAbout(data.about); // Ensure hero is not nul
+      setVehicle(data.vehicle)
       setIsLoading(false);
     });
   };
@@ -37,7 +39,7 @@ function Home() {
           <Hero />
           <BookCar />
           <PlanTrip data={about} />
-          <PickCar />
+          <PickCar data={vehicle} />
           <Banner />
           <ChooseUs />
           <Testimonials />

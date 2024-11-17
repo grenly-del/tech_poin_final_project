@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function CarBox({ data, carID }) {
   const [carLoad, setCarLoad] = useState(true);
+  const [newCarData, setNewCarData] = useState({})
+
+  useEffect(() => {
+    if(data.length != 0) {
+      setNewCarData(data[carID])
+      setCarLoad(false)
+      console.log(data[carID].img)
+    }
+  }, [data])
   return (
     <>
-      {data[carID].map((car, id) => (
-        <div key={id} className="box-cars">
+      <div className="box-cars">
           {/* car */}
           <div className="pick-car">
             {carLoad && <span className="loader"></span>}
             <img
               style={{ display: carLoad ? "none" : "block" }}
-              src={car.img}
+              src={newCarData.img}
               alt="car_img"
               onLoad={() => setCarLoad(false)}
             />
@@ -19,42 +27,42 @@ function CarBox({ data, carID }) {
           {/* description */}
           <div className="pick-description">
             <div className="pick-description__price">
-              <span>${car.price}</span>/ rent per day
+              <span>${newCarData.price}</span>/ rent per day
             </div>
             <div className="pick-description__table">
               <div className="pick-description__table__col">
                 <span>Model</span>
-                <span>{car.model}</span>
+                <span>{newCarData.model}</span>
               </div>
 
               <div className="pick-description__table__col">
                 <span>Mark</span>
-                <span>{car.mark}</span>
+                <span>{newCarData.mark}</span>
               </div>
 
               <div className="pick-description__table__col">
                 <span>Year</span>
-                <span>{car.year}</span>
+                <span>{newCarData.year}</span>
               </div>
 
               <div className="pick-description__table__col">
                 <span>Doors</span>
-                <span>{car.doors}</span>
+                <span>{newCarData.doors}</span>
               </div>
 
               <div className="pick-description__table__col">
                 <span>AC</span>
-                <span>{car.air}</span>
+                <span>{newCarData.air}</span>
               </div>
 
               <div className="pick-description__table__col">
                 <span>Transmission</span>
-                <span>{car.transmission}</span>
+                <span>{newCarData.transmission}</span>
               </div>
 
               <div className="pick-description__table__col">
                 <span>Fuel</span>
-                <span>{car.fuel}</span>
+                <span>{newCarData.fuel}</span>
               </div>
             </div>
             {/* btn cta */}
@@ -62,10 +70,14 @@ function CarBox({ data, carID }) {
               Reserve Now
             </a>
           </div>
-        </div>
-      ))}
+    </div>
+
+
     </>
   );
 }
+
+
+
 
 export default CarBox;

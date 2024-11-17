@@ -9,6 +9,7 @@ const CarImg6 = "./images/cars-big/passat-box.png";
 import { Link } from "react-router-dom";
 
 const Models = () => {
+  
   return (
     <>
       <section className="models-section">

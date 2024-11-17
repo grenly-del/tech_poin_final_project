@@ -5,6 +5,17 @@ const Bmw320 = "./images/cars-big/bmw320.jpg";
 const Benz = "./images/cars-big/benz.jpg";
 const Passat = "./images/cars-big/passatcc.jpg";
 
+
+
+
+
+
+
+
+
+
+
+
 export const CAR_DATA = [
   [
     {

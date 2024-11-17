@@ -2,7 +2,7 @@
 
 
 
-function PlanTrip({data}) {
+const PlanTrip = ({data}) => {
   return (
     <>
       <section className="plan-section">
